@@ -1,0 +1,32 @@
+﻿@model ATM.Models.OperationIndexModel
+@{
+    ViewBag.Title = "Operations";
+}
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Time</th>
+                <th>Amount</th>
+                <th>Balance</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var operation  in Model.operations)
+            {
+                <tr>
+                    <td>@operation.OperationTime</td>
+                    <td>
+                        @(operation.CardIn == User.Identity.Name ? "" : "-")@operation.Amount
+                    </td>
+                    <td>
+                        @(operation.CardIn == User.Identity.Name ? operation.BalanceOnInCard: operation.BalanceOnOutCard)
+                    </td>
+                </tr>
+            }
+            </tbody>          
+        </table>
+    </div>
+</div>
